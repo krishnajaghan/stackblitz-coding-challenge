@@ -1,0 +1,23 @@
+.container {
+  max-width: 400px;
+  margin: 20px auto;
+  text-align: center;
+}
+h2 {
+  color: rgb(91, 228, 125);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  th {
+    color: rgb(91, 228, 125);
+  }
+  tr:nth-child(even) {
+    background: #f2f2f2;
+  }
+}
