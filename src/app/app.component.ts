@@ -39,10 +39,10 @@ export class AppComponent implements OnInit, OnDestroy {
             //mapping here in such a way that in html we can access the props for each table properties
             .map((departure: any) => {  
               const scheduledTime = departure.scheduled
-              ? new Date(departure.scheduled)
+              ? new Date(departure.scheduled.toLocaleString())
               : null;
             const expectedTime = departure.expected
-              ? new Date(departure.expected)
+              ? new Date(departure.expected.toLocaleString())
               : scheduledTime; 
 
               return {
