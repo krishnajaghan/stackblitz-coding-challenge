@@ -17,6 +17,12 @@ table {
   th {
     color: rgb(91, 228, 125);
   }
+  td {
+    &.arriving-now {
+      color: green;
+      font-weight: bold;
+    }
+  }
   tr:nth-child(even) {
     background: #f2f2f2;
   }
