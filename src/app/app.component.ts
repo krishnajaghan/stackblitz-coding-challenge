@@ -32,22 +32,34 @@ export class AppComponent implements OnInit, OnDestroy {
         if (resp?.departures?.length) {
           // get the response in this.departures
           this.departures = resp.departures
-
+        
           //filter check tram is departing from Luma and its destination is Linde
             .filter((departure: any) => departure.stop_area?.name === 'Luma' 
-            && departure.destination === 'Linde')
-            //mapping here in such a way that in html we can access the variable easily
-            .map((departure: any) => ({  
-              destination: departure.destination,
-              direction: departure.direction,
-              scheduled: departure.scheduled ? new Date(departure.scheduled) : null,
-              expected: departure.expected ? new Date(departure.expected) : null,
-              state: departure.state,
+            && departure.direction !== "Sickla")
+            //mapping here in such a way that in html we can access the props for each table properties
+            .map((departure: any) => {  
+              const scheduledTime = departure.scheduled
+              ? new Date(departure.scheduled)
+              : null;
+            const expectedTime = departure.expected
+              ? new Date(departure.expected)
+              : scheduledTime; 
+
+              return {
+                destination: departure.destination,
+                direction: departure.direction,
+                scheduled: scheduledTime,
+                expected: expectedTime,
+                state: departure.state,
 
               //additional requirement to show the contdown timer
               //shows the remaining time until a tram departs.
-              countdown: this.getCountdown(departure.expected),   
-                }));
+                countdown: expectedTime
+                  ? this.getCountdown(expectedTime)
+                  : null,
+              };
+            });
+             
         } else {
           //reset this.departures if there is no value ( failure case check)
           this.departures = [];  
