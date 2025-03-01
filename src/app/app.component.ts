@@ -33,7 +33,7 @@ export class AppComponent implements OnInit, OnDestroy {
           // get the response in this.departures
           this.departures = resp.departures
 
-          //filter the available stations between luma and linde
+          //filter check tram is departing from Luma and its destination is Linde
             .filter((departure: any) => departure.stop_area?.name === 'Luma' 
             && departure.destination === 'Linde')
             //mapping here in such a way that in html we can access the variable easily
@@ -66,7 +66,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   // user can see exactly how much time left before the tram leaves
-  //
   countdownTimer() {
     this.timeDownCounter = setInterval(() => {
       this.departures.forEach(departure => {
