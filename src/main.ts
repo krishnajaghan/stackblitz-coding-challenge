@@ -1,16 +1,9 @@
-// import './polyfills';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { AppComponent } from './app/app.component';
+import { provideHttpClient } from '@angular/common/http';
+import { TramService } from './app/data.service'; 
 
-// import { enableProdMode } from '@angular/core';
-// import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-
-// import { AppModule } from './app/app.module';
-// import { bootstrapApplication } from '@angular/platform-browser';
-// import { AppComponent } from './app/app.component';
-
-// bootstrapApplication(AppComponent);
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { AppModule } from './app/app.module';
-
-platformBrowserDynamic()
-.bootstrapModule(AppModule)
-.catch((err) => console.error(err));
+bootstrapApplication(AppComponent, {
+  providers: [provideHttpClient(), TramService] 
+})
+  .catch(err => console.error(err));

@@ -1,29 +1,161 @@
+* {
+  user-select: none;
+  font-family: 'Arial';
+}
+
 .container {
-  max-width: 400px;
+  max-width: 750px;
   margin: 20px auto;
   text-align: center;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+  transition: background 0.3s, color 0.3s;
+  overflow: hidden;
 }
-h2 {
-  color: rgb(91, 228, 125);
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
 }
-table {
+
+.tram-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 12px;
-  th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
+  min-width: 600px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.tram-table th {
+  background: #389403;
+  color: white;
+  font-size: 16px;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.2s, color 0.2s;
+  border-radius: 4px 4px 0 0;
+}
+
+.tram-table th:hover {
+  background: #89cc62;
+}
+
+.tram-table th .fa {
+  margin-left: 8px;
+  font-size: 14px;
+  opacity: 0.8;
+  transition: color 0.3s ease;
+}
+
+.tram-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.tram-table tbody tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+.tram-table tbody tr:hover {
+  background: #e8f5e9;
+  transition: background 0.2s;
+}
+
+.tram-table td i {
+  font-size: 16px;
+  vertical-align: middle;
+}
+.dark-mode {
+  background: #1e1e1e;
+  color: #f0f0f0;
+}
+
+.dark-mode .container {
+  background: #2c2c2c;
+  color: white;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .tram-table {
+  background: #333;
+  color: white;
+  border-color: #444;
+}
+
+.dark-mode .tram-table th {
+  background: #555;
+}
+
+.dark-mode .tram-table tbody tr:nth-child(even) {
+  background: #3b3b3b;
+}
+
+.dark-mode .tram-table tbody tr:hover {
+  background: #464646;
+}
+
+@media (max-width: 630px) {
+  .container {
+    max-width: 95%;
   }
-  th {
-    color: rgb(91, 228, 125);
+
+  .table-wrapper {
+    max-width: 100%;
+    overflow-x: auto;
   }
-  td {
-    &.arriving-now {
-      color: green;
-      font-weight: bold;
-    }
+
+  .tram-table {
+    min-width: 550px;
   }
-  tr:nth-child(even) {
-    background: #f2f2f2;
-  }
+}
+
+.dark-mode-toggle {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  background: #333;
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.dark-mode-toggle:hover {
+  background: #555;
+}
+/* Basic button styles */
+.theme-toggle {
+  padding: 8px 16px;
+  border: 2px solid #ccd5df;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: transparent;
+  color: #389403;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.theme-toggle.light-mode {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.theme-toggle.dark-mode {
+  background-color: #333;
+  color: #f0f0f0;
+}
+
+.theme-toggle:hover {
+  background-color: #1c2c13;
+  color: white;
 }
