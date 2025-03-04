@@ -1,13 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TramService } from './data.service';
-import { Subscription, interval } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
@@ -53,7 +51,8 @@ export class AppComponent implements OnInit, OnDestroy {
             .filter(
               (departure: any) =>
                 departure.stop_area?.name === 'Luma' &&
-                departure.direction !== 'Sickla'
+                !departure.direction?.toLowerCase().includes('sickla') &&
+                !departure.destination?.toLowerCase().includes('sickla')
             )
             //mapping here in such a way that in html we can access the props for each table properties
             .map((departure: any) => {

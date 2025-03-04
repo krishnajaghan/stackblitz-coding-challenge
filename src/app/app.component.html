@@ -1,34 +1,44 @@
-<div class="container">
-  <div *ngIf="loading" class="top-text">Welcome to Tram Departures</div>
-<div *ngIf="error" class="error">{{ error }}</div>
+<button class="theme-toggle" (click)="toggleDarkMode()">
+  {{ isDarkMode ? 'Light Mode' : 'Dark Mode' }}
+</button>
 
-<table *ngIf="departures.length > 0" class="tram-table">
+<div class="container" [ngClass]="{ 'dark-mode': isDarkMode }">
+  <p>Tram Departures</p>
+
+  <div *ngIf="loading" class="loader">loading...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+  <div class="table-container" *ngIf="departures.length > 0">
+  <table class="tram-table">
   <thead class="tram-table__thead">
-    <tr class="tram-table__thead__trow">
-      <th>Destination</th>
-      <th>Direction</th>
-      <th>Scheduled Time</th>
-      <th>Expected Time</th>
-      <th>State</th>
-      <!-- additional useful data added - countdown-->
-      <th>Countdown</th>
-    </tr>
-  </thead>
-  <tbody class="tram-table__tbody">
-    <tr *ngFor="let dep of departures"
-    [class.arriving-now]="dep.countdown === '0m 0s'" 
-     class="tram-table__tbody__trow">
-      <td>{{ dep.destination }}</td>
-      <td>{{ dep.direction }}</td>
-      <td>{{ dep.scheduled  }}</td>
-      <td>{{ dep.expected  }}</td>
-      <td>{{ dep.state }}</td>
-      <td>{{ dep.countdown }}</td>
-    </tr>
-  </tbody>
-</table>
+  <tr class="tram-table__thead__trow">
+    <th *ngFor="let column of columns" (click)="sortTable(column.key)" [ngClass]="getSortClass(column.key)">
+      {{ column.label }}
+      <i class="fa" [ngClass]="getSortIcon(column.key)"></i>
+    </th>
+  </tr>
+</thead>
+      <tbody class="tram-table__tbody">
+        <tr
+          *ngFor="let dep of departures"
+          [class.arriving-now]="dep.countdown === '0m 0s'"
+          class="tram-table__tbody__trow"
+        >
+          <td>{{ dep.destination }}</td>
+          <td>{{ dep.direction }}</td>
+          <td>{{ dep.scheduled }}</td>
+          <td>{{ dep.expected }}</td>
+          <td [ngClass]="getStatusClass(dep.state)">{{ dep.state }}</td>
+          <td>{{ dep.statusHighlight }}</td>
+          <td>{{ dep.countdown }}</td>
+        </tr>
+      </tbody>
+    </table>
 
-<div *ngIf="departures.length === 0 && !loading && !error" class="empty-data">
-  No departures available right now.
-</div>
+    <div
+      *ngIf="departures.length === 0 && !loading && !error"
+      class="empty-data"
+    >
+      No departures available right now. {{ departures.length }}
+    </div>
+  </div>
 </div>

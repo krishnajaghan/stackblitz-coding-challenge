@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class TramService {
   // private jsonUrl = 'app/assets/tram-data1.json';
-  private jsonUrl = '../assets/tram-data1.json';
+  private jsonUrl = '/assets/tram-data1.json';
 
   constructor(
     private http: HttpClient
